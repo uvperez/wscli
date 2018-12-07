@@ -52,7 +52,6 @@ public class SoapClientImpl implements SoapClient {
                 soapAction = soapAction != null ? "\"" + soapAction + "\"" : "";
                 post.addHeader(PROP_SOAP_ACTION_11, soapAction);
                 post.addHeader(PROP_CONTENT_TYPE, MIMETYPE_TEXT_XML_CHARSET_UTF8);
-//                client.getParams().setParameter(PROP_CONTENT_TYPE, MIMETYPE_TEXT_XML);
             } else if (payload.contains(SOAP_1_2_NAMESPACE)) {
                 String contentType = MIMETYPE_APPLICATION_XML;
                 if (soapAction != null) {
