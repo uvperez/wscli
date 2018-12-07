@@ -18,8 +18,6 @@ public class SoapClientImpl implements SoapClient {
 
 	private CloseableHttpClient client;
 	
-	private String endpoint;
-	
 	private final static String NULL_SOAP_ACTION = null;
 
     private int readTimeoutInMillis;
@@ -32,8 +30,9 @@ public class SoapClientImpl implements SoapClient {
     private Security proxyProperties;
     private boolean proxyTlsEnabled;
 	
-	public SoapClientImpl() {
-		
+	public SoapClientImpl(URI endpointUri) {
+		this.endpointUri = endpointUri;
+		initClient();
 	}
 	
 	protected void initClient() {
@@ -52,7 +51,7 @@ public class SoapClientImpl implements SoapClient {
             if (payload.contains(SOAP_1_1_NAMESPACE)) {
                 soapAction = soapAction != null ? "\"" + soapAction + "\"" : "";
                 post.addHeader(PROP_SOAP_ACTION_11, soapAction);
-                post.addHeader(PROP_CONTENT_TYPE, MIMETYPE_TEXT_XML);
+                post.addHeader(PROP_CONTENT_TYPE, MIMETYPE_TEXT_XML_CHARSET_UTF8);
 //                client.getParams().setParameter(PROP_CONTENT_TYPE, MIMETYPE_TEXT_XML);
             } else if (payload.contains(SOAP_1_2_NAMESPACE)) {
                 String contentType = MIMETYPE_APPLICATION_XML;
@@ -76,9 +75,14 @@ public class SoapClientImpl implements SoapClient {
         }
 	}
 	
-	public static CloseableHttpClient createClient() {
+	protected static CloseableHttpClient createClient() {
 		CloseableHttpClient client = HttpClients.custom().build();
 		return client;
+	}
+
+	@Override
+	public String request(String payload) throws IOException {
+		return request(NULL_SOAP_ACTION, payload);
 	}
 
 }

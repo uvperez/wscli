@@ -20,6 +20,7 @@ public interface SoapClient {
 	    MIMETYPE_TEXT_HTML = "text/html",
 	    MIMETYPE_TEXT_PLAIN = "text/plain",
 	    MIMETYPE_TEXT_XML = "text/xml",
+	    MIMETYPE_TEXT_XML_CHARSET_UTF8 = "text/xml; charset=utf-8",
 	    MIMETYPE_APPLICATION_XML = "application/soap+xml";
 	
 	public final static String
@@ -59,5 +60,13 @@ public interface SoapClient {
 	 * @throws IOException
 	 */
 	public String request(String action, String payload) throws IOException;
+	
+	/**
+	 * Execute
+	 * @param payload
+	 * @return
+	 * @throws IOException
+	 */
+	public String request(String payload) throws IOException;
 	
 }
