@@ -8,7 +8,7 @@ public class TestCalculatorService {
 	
 	public static void main(String[] args) throws Exception {
 		URI uriEndpoint = new URI(WSDL.substring(0, WSDL.length() - 5));
-		SoapClient client = new SoapClientImpl(uriEndpoint);
+		SoapClient client = new SimpleSoapClient(uriEndpoint);
 		String payload;
 		StringBuilder sb = new StringBuilder();
 		sb.append("");

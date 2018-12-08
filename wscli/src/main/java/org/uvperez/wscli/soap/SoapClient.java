@@ -2,6 +2,15 @@ package org.uvperez.wscli.soap;
 
 import java.io.IOException;
 
+/**
+ * 
+ * Represents a soap client basic interface, this make requests to a endpoint in a
+ * string XML parameter.
+ * This can simplify the client side by avoiding boilerplate hierarchy of data storage classes.
+ * 
+ * @author uperez
+ * @version 1.0 8/12/2018
+ */
 public interface SoapClient {
 
 	public final static String
@@ -53,20 +62,22 @@ public interface SoapClient {
 	}
 	
 	/**
-	 * Execute
-	 * @param action
-	 * @param payload
-	 * @return
+	 * Execute a request to a service endpoint
+	 * @param action the SoapAction parameter
+	 * @param payload the XML request
+	 * @return the response from the service
 	 * @throws IOException
 	 */
 	public String request(String action, String payload) throws IOException;
 	
 	/**
-	 * Execute
-	 * @param payload
-	 * @return
+	 * Execute a request to a service endpoint
+	 * @param payload the XML request
+	 * @return the response from the service
 	 * @throws IOException
 	 */
 	public String request(String payload) throws IOException;
+	
+	
 	
 }

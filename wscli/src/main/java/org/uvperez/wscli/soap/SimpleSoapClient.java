@@ -3,7 +3,6 @@ package org.uvperez.wscli.soap;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.security.Security;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,23 +13,24 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-public class SoapClientImpl implements SoapClient {
+/**
+ * Simple SOAP client that uses apache http components classes.
+ * This class works with the default configuration of the support classes.
+ * This class can be inherited to add more functionality/configuration
+ * @author uperez
+ *
+ */
+public class SimpleSoapClient implements SoapClient {
 
 	private CloseableHttpClient client;
 	
 	private final static String NULL_SOAP_ACTION = null;
 
-    private int readTimeoutInMillis;
-    private int connectTimeoutInMillis;
-
-    private URI endpointUri;
-    private boolean endpointTlsEnabled;
-
-    private URI proxyUri;
-    private Security proxyProperties;
-    private boolean proxyTlsEnabled;
+	private URI endpointUri;
 	
-	public SoapClientImpl(URI endpointUri) {
+    
+	
+	public SimpleSoapClient(URI endpointUri) {
 		this.endpointUri = endpointUri;
 		initClient();
 	}
@@ -74,7 +74,7 @@ public class SoapClientImpl implements SoapClient {
         }
 	}
 	
-	protected static CloseableHttpClient createClient() {
+	protected CloseableHttpClient createClient() {
 		CloseableHttpClient client = HttpClients.custom().build();
 		return client;
 	}
